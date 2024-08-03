@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Media Files</title>
+</head>
+<body>
+    <h1>Media Files</h1>
+    <ul>
+        {% for file in files %}
+            <li><a href="{% url 'stream_media' file %}">{{ file }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

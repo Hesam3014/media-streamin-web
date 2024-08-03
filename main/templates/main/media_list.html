@@ -1,0 +1,55 @@
+<!-- templates/main/media_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Media List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .player {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Available Media Files</h1>
+    <ul>
+        {% for item in items %}
+            {% if item.is_dir %}
+                <li><a href="?path={{ item.path }}">{{ item.name }}/</a></li>
+            {% else %}
+                <li><a href="?path={{ item.path }}&file={{ item.path }}">{{ item.name }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    {% if selected_file %}
+        <h2>Now Playing: {{ selected_file_name }}</h2>
+        <div class="player">
+            {% if selected_file %}
+                <video width="640" height="480" controls>
+                    <source src="{{ selected_file }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            {% endif %}
+        </div>
+    {% endif %}
+</body>
+</html>
